@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="filebook">
+
+	<select id="list" resultType="fvo">
+		select * from filebook
+	</select>
+	
+	<insert id="insert" parameterType="fvo">
+		insert into filebook(
+							content,
+							email,
+							name,
+							pwd,
+							f_name,
+							regdate,
+							subject)
+		values(
+				#{content},
+				#{email},
+				#{name},
+				#{pwd},
+				#{f_name},
+				SYSDATE(),
+				#{subject}
+		)
+	</insert>
+	
+	<select id="onelist" parameterType="String" resultType="fvo">
+		select * from filebook where idx = #{idx}
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		delete from filebook where idx = #{idx}
+	</delete>
+	
+	<update id="update" parameterType="fvo">
+		update filebook
+		set name =#{name},
+			content =#{content},
+			email =#{email},
+			name =#{name},
+			f_name =#{f_name},
+			subject =#{subject}
+		where idx =#{idx}
+	
+	</update>
+</mapper>
